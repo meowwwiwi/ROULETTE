@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin house</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="body-ruleta-transacciones">
+    <header id="header-deposito">
+        <nav id="nav-deposito">
+            <ul>
+                <li><a href="ruleta.html" class="active">Juega ahora</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container-ruleta">
+        <section class="section-ruleta">
+            <h1 class="h1-jo-ruleta">Transacciones</h1>
+            
+            <div class="saldo-display">
+                Saldo actual: <span>50.000 $</span>
+            </div>
+            
+            <div class="transacciones-grid">
+                <div class="transaccion-form-ruleta">
+                    <h2 class="h2-jo-ruleta">Ingresar Dinero</h2>
+                    <div class="form-group-ruleta">
+                        <label for="monto-ingreso">Monto a depositar</label>
+                        <input type="number" id="monto-ingreso" name="monto-ingreso" min="10" step="10" placeholder="Ej: 100.000" class="input-ruleta">
+                    </div>
+                    <button class="btn-ruleta-primary">Depositar</button>
+                </div>
+                
+                <div class="transaccion-form-ruleta">
+                    <h2 class="h2-jo-ruleta">Retirar Dinero</h2>
+                    <div class="form-group-ruleta">
+                        <label for="monto-retiro">Monto a retirar</label>
+                        <input type="number" id="monto-retiro" name="monto-retiro" min="10" step="10" placeholder="Ej: 50.000" class="input-ruleta">
+                    </div>
+                    <button class="btn-ruleta-primary">Retirar</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

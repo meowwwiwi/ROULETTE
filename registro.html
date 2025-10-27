@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>¡Bienvenid@ a Spin house</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="java.js"></script>
+  </head>
+<body id="registro_body">
+  <div id="marco">
+    <h1 class="title">Completa los siguientes datos para registrarte</h1>
+    <form id="registro_form">
+      <input type="text" id="nombre_r" placeholder="Nombre completo" required>
+      <input type="date" id="fecha_nac_r"placeholder="Fecha de nacimiento" required>
+      <input type="email" id="correo_r" placeholder="Correo electrónico" required>
+      <input type="text" id="user_r" placeholder="Nombre de usuario" required>
+      <div class="grupo_input">
+      <input type="password" id="pass_r" placeholder="Contraseña" required>
+      <button type="button" class="btn-ver" data-target="pass_r">Mostrar</button>
+      </div>
+      <div class="grupo_input">
+      <input type="password" id="pass_confirm_r" placeholder="Confirmar contraseña" required oninput="this.setCustomValidity(this.value !== document.getElementById('pass_r').value ? 'Las contraseñas no coinciden' : '')">
+      <button type="button" class="btn-ver" data-target="pass_confirm_r">Mostrar</button>
+        </div>
+      <button type="submit" id="registrarse" formaction="casino.html">Registrarse</button>
+    </form>
+    <footer id="footer-desarrolladores">
+        <p id="p-footer">© Spin House</p>
+      </footer>
+  </div>
+</body>
+</html>

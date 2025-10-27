@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=devide-width, initial-scale=1" />
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="java.js"></script>
+</head>
+<body class="alt-body">
+
+  <h1 id="perfil-title">Perfil de Usuario</h1>
+
+  <main class="perfil-container">
+    <div class="perfil-grid">
+      <div class="perfil-col izquierda">
+        <section class="perfil-info">
+          <h2>Información personal</h2>
+          <p><strong>Nombre:</strong> Juan Pérez</p>
+          <p><strong>Email:</strong> juanperez@mail.com</p>
+        </section>
+
+        <section class="perfil-ruleta">
+          <h2>Acceso a la mesa</h2>
+          <a href="ruleta.html" class="btn-ruleta">Ir a la Ruleta</a>
+        </section>
+      </div>
+
+      <div class="perfil-col derecha">
+        <section class="perfil-saldo">
+          <h2>Saldo actual</h2>
+          <p><span id="saldo-usuario">$ 50.000</span></p>
+        </section>
+
+        <section class="perfil-transacciones">
+          <h2>Últimas transacciones</h2>
+          <table class="transacciones">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2025-09-01</td><td>Depósito</td><td>$20.000</td></tr>
+              <tr><td>2025-08-30</td><td>Apuesta</td><td>-$5.000</td></tr>
+              <tr><td>2025-08-28</td><td>Ganancia</td><td>$10.000</td></tr>
+              <tr><td>2025-08-25</td><td>Apuesta</td><td>-$3.000</td></tr>
+              <tr><td>2025-08-23</td><td>Depósito</td><td>$28.000</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <footer id="footer-reglas">
+      <p>© 2025 Spin House</p>
+    </footer>
+  </main>
+</body>
+</html>

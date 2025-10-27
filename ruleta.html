@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ruleta</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="body-ruleta-transacciones">
+    <header id="header-ruleta">
+        <nav id="nav-ruleta">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="deposito.html" class="active">Deposita acá!</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-ruleta">
+        <section class="section-ruleta">
+            <h1 class="h1-jo-ruleta">Juego de Ruleta</h1>
+            
+            <div class="ruleta-container">
+                <img src="https://cdn.discordapp.com/attachments/1408241923139047635/1414414171281293362/ruletaimagen.png?ex=68bf7b58&is=68be29d8&hm=037af4e55d374573a4cd08bcfd631583e3ddd5cdf4a5534b85d933bb74b4a0b5&" alt="Ruleta Spin House" class="ruleta-image">
+                
+                <div class="estado-juego-ruleta">Estado: Recibiendo apuestas</div>
+                
+                <div class="saldo-display">
+                    Saldo disponible para apostar: <span>50.000$</span>
+                </div>
+                <button class="btn-ruleta-primary">Girar Ruleta</button>
+            </div>
+            
+            <div class="grid-container-ruleta">
+                <div class="card-ruleta">
+                    <h2 class="h2-jo-ruleta">Últimos 5 Números Ganadores</h2>
+                    <table class="table-ruleta">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Color</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>32</td>
+                                <td class="text-rojo">Rojo</td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td class="text-negro">Negro</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td class="text-verde">Verde</td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td class="text-rojo">Rojo</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="text-negro">Negro</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="card-ruleta">
+                    <h2 class="h2-jo-ruleta">Últimas 5 Apuestas Realizadas</h2>
+                    <table class="table-ruleta">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Monto</th>
+                                <th>Resultado</th>
+                                <th>Variación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rojo</td>
+                                <td>100,000 $</td>
+                                <td>Ganada</td>
+                                <td class="text-ganancia">+100,000$</td>
+                            </tr>
+                            <tr>
+                                <td>Docena 1</td>
+                                <td>50,000 $</td>
+                                <td>Perdida</td>
+                                <td class="text-perdida">-50,000$</td>
+                            </tr>
+                            <tr>
+                                <td>Número 17</td>
+                                <td>25,000$</td>
+                                <td>Perdida</td>
+                                <td class="text-perdida">-25,000$</td>
+                            </tr>
+                            <tr>
+                                <td>Par</td>
+                                <td>75,000$</td>
+                                <td>Ganada</td>
+                                <td class="text-ganancia">+75,000$</td>
+                            </tr>
+                            <tr>
+                                <td>Columna 2</td>
+                                <td>60,000$</td>
+                                <td>Perdida</td>
+                                <td class="text-perdida">-60,000$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const estados = ["Recibiendo apuestas", "Esperando resultado", "Pagando"];
+            const elementoEstado = document.querySelector('.estado-juego-ruleta');
+            let indiceEstado = 0;
+            
+            setInterval(() => {
+                indiceEstado = (indiceEstado + 1) % estados.length;
+                elementoEstado.textContent = "Estado: " + estados[indiceEstado];
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
