@@ -517,7 +517,7 @@ body.alt-body-index::before {
   min-height: 70vh;     
   text-align: center;
   margin-top: 0px;  
-  margin-left: 140px;
+  margin-left: 10px;
 }
 
 
@@ -706,7 +706,18 @@ body#fondo_casino {
   align-items: center;
 }
 
-#usuario_casino,
+#usuario_casino{
+  width: 390px;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #222;
+  color: #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
 #clave_oculta {
   width: 300px;
   padding: 12px;
@@ -859,6 +870,10 @@ main, section, .transacciones {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 /* Headers */
@@ -925,7 +940,7 @@ main, section, .transacciones {
 
 .h2-jo-ruleta {
   color: #f0a500;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-shadow: 0 0 6px rgba(255,0,0,0.4),
                0 0 6px rgba(0,128,0,0.4);
 }
@@ -961,6 +976,7 @@ main, section, .transacciones {
 .btn-ruleta-primary {
   padding: 12px 25px;
   border-radius: 8px;
+  margin-top: 15px;
   background: linear-gradient(135deg, #FF0000, #008000);
   color: #fff;
   font-weight: bold;
@@ -1018,21 +1034,39 @@ main, section, .transacciones {
 /* Transacciones */
 .transacciones-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
   margin-top: 30px;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+}
+
+.transaccion-form-ruleta:first-child{
+  justify-self: start;
+  margin-right: auto;
+}
+
+.transaccion-form-ruleta:last-child{
+  justify-self: end;
+  margin-left: auto;
+}
+
+.transaccion-form-ruleta .btn-ruleta-primary{
+  margin-top: 10px;
 }
 
 .transaccion-form-ruleta {
   background-color: rgba(0,0,0,0.6);
-  padding: 20px;
+  padding: 30px 25px;
+  min-height: 250px;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(255,0,0,0.3),
               0 0 20px rgba(0,128,0,0.3);
 }
 
 .form-group-ruleta {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   text-align: left;
 }
 
@@ -1043,8 +1077,11 @@ main, section, .transacciones {
 }
 
 .input-ruleta {
-  width: 100%;
-  padding: 10px;
+  width: 90%;
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+  padding: 12px;
   border-radius: 8px;
   border: 1px solid #f0a500;
   background-color: #1a1a1a;
