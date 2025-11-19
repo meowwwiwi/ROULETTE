@@ -17,7 +17,7 @@ const User = mongoose.model('User', {
   email: String,
   usuario: String,
   password: String,
-  saldo: { type: Number, default: 50000 }
+  saldo: { type: Number, default: 1000 }
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +36,47 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/registro', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'registro.html'));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'iniciosesion.html'));
+});
+
+app.get('/perfil', (req, res) => {
+  if (!req.session.userId) {
+    return res.redirect('/login');
+  }
+  res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
+});
+
+app.get('/ruleta', (req, res) => {
+  if (!req.session.userId) {
+    return res.redirect('/login');
+  }
+  res.sendFile(path.join(__dirname, 'public', 'ruleta.html'));
+});
+
+app.get('/deposito', (req, res) => {
+  if (!req.session.userId) {
+    return res.redirect('/login');
+  }
+  res.sendFile(path.join(__dirname, 'public', 'deposito.html'));
+});
+
+app.get('/ruletayreglas', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'ruletayreglas.html'));
+});
+
+app.get('/informacion', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'informacion.html'));
+});
+
 app.post('/registro', async (req, res) => {
   try {
     const { nombre, fecha_nac_r, correo_r, user_r, pass_r } = req.body;
@@ -51,10 +92,10 @@ app.post('/registro', async (req, res) => {
     
     await user.save();
     req.session.userId = user._id;
-    res.redirect('/perfil.html');
+    res.redirect('/perfil');
     
   } catch (error) {
-    res.redirect('/registro.html?error=1');
+    res.redirect('/registro?error=1');
   }
 });
 
@@ -65,12 +106,12 @@ app.post('/login', async (req, res) => {
     
     if (user && await bcrypt.compare(clave_oculta, user.password)) {
       req.session.userId = user._id;
-      res.redirect('/perfil.html');
+      res.redirect('/perfil');
     } else {
-      res.redirect('/iniciosesion.html?error=1');
+      res.redirect('/login?error=1');
     }
   } catch (error) {
-    res.redirect('/iniciosesion.html?error=1');
+    res.redirect('/login?error=1');
   }
 });
 
