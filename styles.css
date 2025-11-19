@@ -689,7 +689,7 @@ body#fondo_casino {
 }
 
 #inicio_sesion {
-  background-color: rgba(113, 10, 10, 0.6);
+  background-color: rgba(112, 10, 10, 0.6);
   padding: 20px;
   border-radius: 15px;
   font-size: 1.5rem;
@@ -698,6 +698,12 @@ body#fondo_casino {
                0 0 5px rgba(0,128,0,0.5),
                0 0 10px rgba(192,192,192,0.6);
   color: white;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
 }
 
 #form_casino {
@@ -733,26 +739,30 @@ body#fondo_casino {
 #usuario_casino:focus,
 #clave_oculta:focus {
   outline: none;
-  box-shadow: 0 0 10px rgba(255,0,0,0.5),
-              0 0 10px rgba(0,128,0,0.5);
+  box-shadow: rgba(112, 10, 10, 0.6);
   background-color: #333;
 }
 
 #boton_entrar {
+  width: 100%;
+  max-width: 390px;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 8px;
   border: none;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 15px;
   transition: all 0.3s ease;
   background-color: #ffcc00;
   color: #000;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #boton_entrar:hover {
   background-color: #ffcc00;
-  color: #000;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
 }
 
 .div_casino {
