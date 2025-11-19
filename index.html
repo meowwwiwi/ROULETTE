@@ -4,16 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=devide-width, initial-scale=1" />
     <title>index</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="java.js"></script>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/java.js"></script>
   </head>
   <body class="alt-body-index">
     <header id="header-index">
         <nav id="nav-index">
             <ul id="ul-desarrolladores">
-                <li><a href="index.html"  class="active">Inicio</a></li>
-                <li><a href="ruletayreglas.html">Ruleta y Reglas</a></li>
-                <li><a href="informacion.html">Información</a></li>
+                <li><a href="/"  class="active">Inicio</a></li>
+                <li><a href=/ruletayreglas">Ruleta y Reglas</a></li>
+                <li><a href="/informacion">Información</a></li>
+                {{#if user}}
+                <li><a href="/logout">Cerrar Sesión</a></li>
+                {{/if}}
             </ul>
         </nav>
     </header>
@@ -25,13 +28,32 @@
         </div>
 
     <section id="center">
-        <h1 id="titulo_index">¡Bienvenid@ a Spin House!</h1>
+        <h1 id="titulo_index">
+            {{#if user}}
+            !Bienvenidx de nuevo, {{user.username}}!
+            {{else}}
+            ¡Bienvenid@ a Spin House!
+            {{/if}}
+        </h1>
+
+        {{#if user}}
+        <div class="link_box">
+            <a href="/perfil">Mi perfil</a>
+        </div>
+        <div class="link_box">
+            <a href="/ruleta">Jugar ahora</a>
+        </div>
+        <div class="link_box">
+            <a href="/deposito">Hacer depósito</a>
+        
+        {{else}}
         <div class="link_box">
             <a href="registro.html" id="registro-link">Registro de usuario</a>
         </div>
         <div class="link_box">
             <a href="iniciosesion.html" id="casino-link">Acceso al casino</a>
         </div>
+        {{/if}}
     </section>
     </div>
     
