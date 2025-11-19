@@ -3,46 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spin house</title>
+    <title>Spin House - Transacciones</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="body-ruleta-transacciones">
     <header id="header-deposito">
         <nav id="nav-deposito">
             <ul>
-                <li><a href="ruleta.html" class="active">Juega ahora</a></li>
+                <li><a href="/ruleta" class="active">Juega ahora</a></li>
+                <li><a href="/perfil">Mi Perfil</a></li>
             </ul>
         </nav>
     </header>
+    
     <div class="container-ruleta">
         <section class="section-ruleta">
-            <h1 class="h1-jo-ruleta">Transacciones</h1>
+            <h1 class="h1-jo-ruleta">Gestión de Saldo</h1>
             
             <div class="saldo-display">
-                Saldo actual: <span>50.000 $</span>
+                Saldo actual: <span id="saldo-actual">Cargando...</span>
             </div>
             
             <div class="transacciones-grid">
                 <div class="transaccion-form-ruleta">
                     <h2 class="h2-jo-ruleta">Ingresar Dinero</h2>
-                    <div class="form-group-ruleta">
-                        <label for="monto-ingreso">Monto a depositar</label>
-                        <input type="number" id="monto-ingreso" name="monto-ingreso" min="10" step="10" placeholder="Ej: 100.000" class="input-ruleta">
-                    </div>
-                    <button class="btn-ruleta-primary">Depositar</button>
+                    <form id="form-deposito">
+                        <div class="form-group-ruleta">
+                            <label for="monto-ingreso">Monto a depositar</label>
+                            <input type="number" id="monto-ingreso" name="monto-ingreso" min="1000" step="1000" placeholder="Ej: 10.000" class="input-ruleta" required>
+                            <small>Mínimo: $1.000</small>
+                        </div>
+                        <button type="submit" class="btn-ruleta-primary">Depositar</button>
+                    </form>
+                    <div id="mensaje-deposito" style="margin-top: 10px;"></div>
                 </div>
-                
                 <div class="transaccion-form-ruleta">
                     <h2 class="h2-jo-ruleta">Retirar Dinero</h2>
-                    <div class="form-group-ruleta">
-                        <label for="monto-retiro">Monto a retirar</label>
-                        <input type="number" id="monto-retiro" name="monto-retiro" min="10" step="10" placeholder="Ej: 50.000" class="input-ruleta">
-                    </div>
-                    <button class="btn-ruleta-primary">Retirar</button>
+                    <form id="form-retiro">
+                        <div class="form-group-ruleta">
+                            <label for="monto-retiro">Monto a retirar</label>
+                            <input type="number" id="monto-retiro" name="monto-retiro" min="1000" step="1000" placeholder="Ej: 5.000" class="input-ruleta" required>
+                            <small>Mínimo: $1.000</small>
+                        </div>
+                        <button type="submit" class="btn-ruleta-primary">Retirar</button>
+                    </form>
+                    <div id="mensaje-retiro" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+            <div class="card-ruleta" style="margin-top: 40px;">
+                <h2 class="h2-jo-ruleta">Historial de Transacciones</h2>
+                <div id="historial-transacciones">
+                    <p>Cargando transacciones...</p>
                 </div>
             </div>
         </section>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarSaldoActual();
+            cargarHistorialTransacciones();
+        });
+        async function cargarSaldoActual() {
+            try {
+                const response = await fetch('/api/saldo');
+                const data = await response.json();
+                
+                if (data.saldo !== undefined) {
+                    document.getElementById('saldo-actual').textContent = '$ ' + data.saldo.toLocaleString();
+                }
+            } catch (error) {
+                document.getElementById('saldo-actual').textContent = 'Error al cargar';
+            }
+        }
+        document.getElementById('form-deposito').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const monto = parseInt(document.getElementById('monto-ingreso').value);
+            const mensajeDiv = document.getElementById('mensaje-deposito');
+            
+            if (monto < 1000) {
+                mensajeDiv.innerHTML = '<p style="color: red;">Monto mínimo: $1.000</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/transactions/depositar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ monto: monto })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    mensajeDiv.innerHTML = `<p style="color: green;">✅ Depositado $${monto.toLocaleString()} exitosamente</p>`;
+                    document.getElementById('monto-ingreso').value = '';
+                    cargarSaldoActual();
+                    cargarHistorialTransacciones();
+                } else {
+                    mensajeDiv.innerHTML = `<p style="color: red;">❌ Error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                mensajeDiv.innerHTML = '<p style="color: red;">❌ Error de conexión</p>';
+            }
+        });
+        document.getElementById('form-retiro').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const monto = parseInt(document.getElementById('monto-retiro').value);
+            const mensajeDiv = document.getElementById('mensaje-retiro');
+            
+            if (monto < 1000) {
+                mensajeDiv.innerHTML = '<p style="color: red;">Monto mínimo: $1.000</p>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/transactions/retirar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ monto: monto })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    mensajeDiv.innerHTML = `<p style="color: green;">✅ Retirado $${monto.toLocaleString()} exitosamente</p>`;
+                    document.getElementById('monto-retiro').value = '';
+                    cargarSaldoActual();
+                    cargarHistorialTransacciones();
+                } else {
+                    mensajeDiv.innerHTML = `<p style="color: red;">❌ ${data.error}</p>`;
+                }
+            } catch (error) {
+                mensajeDiv.innerHTML = '<p style="color: red;">❌ Error de conexión</p>';
+            }
+        });
+
+        async function cargarHistorialTransacciones() {
+            try {
+                const response = await fetch('/api/transacciones');
+                const transacciones = await response.json();
+                
+                const container = document.getElementById('historial-transacciones');
+                
+                if (transacciones.length === 0) {
+                    container.innerHTML = '<p>No hay transacciones recientes</p>';
+                    return;
+                }
+                
+                let html = `
+                    <table class="table-ruleta">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                transacciones.forEach(trans => {
+                    const fecha = new Date(trans.fecha).toLocaleDateString();
+                    const signo = trans.tipo === 'deposito' ? '+' : '-';
+                    const color = trans.tipo === 'deposito' ? '#00ff7f' : '#ff4040';
+                    
+                    html += `
+                        <tr>
+                            <td>${fecha}</td>
+                            <td>${trans.descripcion || trans.tipo}</td>
+                            <td style="color: ${color}; font-weight: bold;">
+                                ${signo}$${trans.monto.toLocaleString()}
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                        </tbody>
+                    </table>
+                `;
+            container.innerHTML = html;
+            } catch (error) {
+                document.getElementById('historial-transacciones').innerHTML = '<p>Error al cargar transacciones</p>';
+            }
+        }
+    </script>
 </body>
 </html>
