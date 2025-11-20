@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #124029;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+.casino-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #124029;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.saldo-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 10px;
+}
+
+.game-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.ruleta-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    margin-left: 20px;
+}
+
+.ruleta-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.rueda {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 3s cubic-bezier(0.2, 0.8, 0.4, 1);
+    z-index: 2;
+    top: 7.5%;
+    left: 7.5%;
+}
+
+.puntero-fijo {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid #ff0000;
+    z-index: 100;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 5px rgba(255,0,0,0.7));
+}
+
+.mesa-apuestas {
+    display: grid;
+    grid-template-areas: 
+        "cero numeros"
+        "docenas docenas"
+        "simples simples";
+    grid-template-columns: 50px 1fr;
+    gap: 2px;
+    background-color: #0c4224;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    min-width: 500px;
+}
+
+.celda-apuesta {
+    background-color: rgba(50, 50, 50, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.1s;
+    user-select: none;
+    height: 40px;
+}
+.celda-apuesta:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.celda-apuesta.red { background-color: #cc0000; }
+.celda-apuesta.black { background-color: #1a1a1a; }
+.celda-apuesta.cero { 
+    grid-area: cero;
+    background-color: #008000;
+    height: 124px;
+    font-size: 24px;
+}
+
+.cuadricula-numeros {
+    grid-area: numeros;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.fila-numeros {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr) 50px;
+    gap: 2px;
+}
+
+.docenas-apuestas {
+    grid-area: docenas;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    height: 40px;
+}
+
+.simple-apuestas {
+    grid-area: simples;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    height: 40px;
+}
+
+.large-bet {
+    background-color: #008000;
+    font-size: 16px;
+}
+.red-apuesta { background-color: #cc0000; }
+.black-apuesta { background-color: #1a1a1a; }
+.col-apuesta { background-color: #555; }
+
+.chip-on-table {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid yellow;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 0 5px black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.controles-laterales {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.ultimos-numeros {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.ultimos-numeros h3 {
+    color: gold;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+    margin: 0;
+}
+
+.numeros-recientes {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.numero-reciente {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.numero-reciente.red { background-color: #cc0000; }
+.numero-reciente.black { background-color: #1a1a1a; }
+.numero-reciente.green { background-color: #008000; }
+
+.estado-ganadores {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.estado-ganadores h3 {
+    margin-bottom: 10px;
+    color: gold;
+    text-shadow: 1px 1px 2px black;
+    text-align: center;
+}
+
+.barra-progreso {
+    width: 150px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progreso {
+    height: 100%;
+    width: 60%;
+    background: linear-gradient(to right, #ffd700, #ff8c00);
+    border-radius: 5px;
+}
+
+.controles-inferiores {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.boton-accion {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.limpiar-apuesta {
+    background-color: #a04000;
+    color: white;
+}
+.limpiar-apuesta:hover { background-color: #c05000; }
+
+.hacer-apuesta {
+    background-color: #007bff;
+    color: white;
+}
+.hacer-apuesta:hover { background-color: #0069d9; }
+
+.pila-fichas {
+    display: flex;
+    gap: 10px;
+}
+
+.ficha {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5), 0 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.1s;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+.ficha:hover {
+    transform: translateY(-3px);
+}
+.ficha.seleccionada {
+    border-color: yellow;
+    transform: scale(1.1);
+}
+
+.ficha-100 { background-image: url('chip_purple.png'); }
+.ficha-20 { background-image: url('chip_blue.png'); }
+.ficha-10 { background-image: url('chip_orange.png'); }
+.ficha-5 { background-image: url('chip_black.png'); }
+
+#resultado {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    color: yellow;
+    z-index: 200;
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .controles-laterales {
+        margin-left: 0;
+        margin-top: 20px;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .mesa-apuestas {
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .mesa-apuestas {
+        min-width: 300px;
+        grid-template-columns: 40px 1fr;
+    }
+    
+    .fila-numeros {
+        grid-template-columns: repeat(12, 1fr) 40px;
+    }
+    
+    .celda-apuesta {
+        font-size: 12px;
+        height: 35px;
+    }
+    
+    .celda-apuesta.cero {
+        height: 109px;
+        font-size: 20px;
+    }
+    
+    .ruleta-container {
+        width: 250px;
+        height: 250px;
+    }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta Europea</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="casino-layout">
+        <div class="saldo-display">
+            SALDO: <span id="saldoActual">1000.00</span> $
+        </div>
+        
+        <div class="game-area">
+            <div class="ruleta-container">
+                <div class="ruleta-base" style="background-image: url('roulette_1.jpg');"></div>
+                <div class="rueda" id="rueda" style="background-image: url('roulette_2.png');"></div>
+                <div class="puntero-fijo"></div>
+            </div>
+
+            <div class="mesa-apuestas">
+                <div class="celda-apuesta cero" data-apuesta="0">0</div>
+                
+                <div class="cuadricula-numeros">
+                    <div class="fila-numeros">
+                        <div class="celda-apuesta red" data-apuesta="1">1</div>
+                        <div class="celda-apuesta black" data-apuesta="4">4</div>
+                        <div class="celda-apuesta red" data-apuesta="7">7</div>
+                        <div class="celda-apuesta black" data-apuesta="10">10</div>
+                        <div class="celda-apuesta black" data-apuesta="13">13</div>
+                        <div class="celda-apuesta red" data-apuesta="16">16</div>
+                        <div class="celda-apuesta red" data-apuesta="19">19</div>
+                        <div class="celda-apuesta black" data-apuesta="22">22</div>
+                        <div class="celda-apuesta red" data-apuesta="25">25</div>
+                        <div class="celda-apuesta black" data-apuesta="28">28</div>
+                        <div class="celda-apuesta black" data-apuesta="31">31</div>
+                        <div class="celda-apuesta red" data-apuesta="34">34</div>
+                        <div class="celda-apuesta col-apuesta" data-apuesta="2to1-col1">2:1</div>
+                    </div>
+                    <div class="fila-numeros">
+                        <div class="celda-apuesta black" data-apuesta="2">2</div>
+                        <div class="celda-apuesta red" data-apuesta="5">5</div>
+                        <div class="celda-apuesta black" data-apuesta="8">8</div>
+                        <div class="celda-apuesta red" data-apuesta="11">11</div>
+                        <div class="celda-apuesta black" data-apuesta="14">14</div>
+                        <div class="celda-apuesta red" data-apuesta="17">17</div>
+                        <div class="celda-apuesta red" data-apuesta="20">20</div>
+                        <div class="celda-apuesta black" data-apuesta="23">23</div>
+                        <div class="celda-apuesta red" data-apuesta="26">26</div>
+                        <div class="celda-apuesta black" data-apuesta="29">29</div>
+                        <div class="celda-apuesta black" data-apuesta="32">32</div>
+                        <div class="celda-apuesta red" data-apuesta="35">35</div>
+                        <div class="celda-apuesta col-apuesta" data-apuesta="2to1-col2">2:1</div>
+                    </div>
+                    <div class="fila-numeros">
+                        <div class="celda-apuesta red" data-apuesta="3">3</div>
+                        <div class="celda-apuesta black" data-apuesta="6">6</div>
+                        <div class="celda-apuesta red" data-apuesta="9">9</div>
+                        <div class="celda-apuesta black" data-apuesta="12">12</div>
+                        <div class="celda-apuesta red" data-apuesta="15">15</div>
+                        <div class="celda-apuesta black" data-apuesta="18">18</div>
+                        <div class="celda-apuesta black" data-apuesta="21">21</div>
+                        <div class="celda-apuesta red" data-apuesta="24">24</div>
+                        <div class="celda-apuesta black" data-apuesta="27">27</div>
+                        <div class="celda-apuesta red" data-apuesta="30">30</div>
+                        <div class="celda-apuesta red" data-apuesta="33">33</div>
+                        <div class="celda-apuesta black" data-apuesta="36">36</div>
+                        <div class="celda-apuesta col-apuesta" data-apuesta="2to1-col3">2:1</div>
+                    </div>
+                </div>
+
+                <div class="docenas-apuestas">
+                    <div class="celda-apuesta large-bet" data-apuesta="1st12">1ª 12</div>
+                    <div class="celda-apuesta large-bet" data-apuesta="2nd12">2ª 12</div>
+                    <div class="celda-apuesta large-bet" data-apuesta="3rd12">3ª 12</div>
+                </div>
+
+                <div class="simple-apuestas">
+                    <div class="celda-apuesta large-bet" data-apuesta="1to18">1-18</div>
+                    <div class="celda-apuesta large-bet" data-apuesta="EVEN">PAR</div>
+                    <div class="celda-apuesta large-bet red-apuesta" data-apuesta="ROJO">R</div>
+                    <div class="celda-apuesta large-bet black-apuesta" data-apuesta="NEGRO">N</div>
+                    <div class="celda-apuesta large-bet" data-apuesta="ODD">IMPAR</div>
+                    <div class="celda-apuesta large-bet" data-apuesta="19to36">19-36</div>
+                </div>
+            </div>
+            
+            <div class="controles-laterales">
+                <div class="ultimos-numeros">
+                    <h3>ÚLTIMOS NÚMEROS</h3>
+                    <div class="numeros-recientes" id="numerosRecientes">
+                        <div class="numero-reciente black">6</div>
+                        <div class="numero-reciente red">15</div>
+                        <div class="numero-reciente red">11</div>
+                        <div class="numero-reciente black">33</div>
+                    </div>
+                </div>
+                <div class="estado-ganadores">
+                    <h3>GANADORES</h3>
+                    <div class="barra-progreso">
+                        <div class="progreso"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controles-inferiores">
+            <button class="boton-accion limpiar-apuesta" id="limpiarApuestaBtn">Limpiar Apuestas</button>
+            <div class="pila-fichas">
+                <div class="ficha ficha-100 seleccionada" data-valor="100">100</div>
+                <div class="ficha ficha-20" data-valor="20">20</div>
+                <div class="ficha ficha-10" data-valor="10">10</div>
+                <div class="ficha ficha-5" data-valor="5">5</div>
+            </div>
+            <button class="boton-accion hacer-apuesta" id="girarBtn">Girar Ruleta</button>
+        </div>
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
